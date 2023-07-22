@@ -1,0 +1,9 @@
+{
+  "name": "fastapi-docker",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "demo-app",
+  "workspaceFolder": "/src",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  }
+}
