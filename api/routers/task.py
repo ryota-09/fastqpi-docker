@@ -14,6 +14,6 @@ async def create_task():
 async def update_task():
   pass
 
-@router.default("/tasks/{task_id}")
+@router.delete("/tasks/{task_id}")
 async def delete_task():
   pass
