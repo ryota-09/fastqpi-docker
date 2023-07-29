@@ -23,8 +23,12 @@ async def update_task(task_id: int, task_body: task_schema.TaskCreate, db: Sessi
   return task_crud.update_task(db, task_body,original=task)
 
 @router.delete("/tasks/{task_id}", response_model=None)
-async def delete_task(task_id: int):
-  return 
+async def delete_task(task_id: int, db: Session = Depends(get_db)):
+  # print(f"@@@@@@@@@@ {task_id}")
+  task = task_crud.get_task(db,task_id=task_id)
+  if task is None:
+    raise HTTPException(status_code=404, detail="Task not found")
+  return task_crud.delete_task(db, original=task)
 
 @router.put("/tasks/{task_id}/done", response_model=None)
 async def mark_task_as_done(task_id: int):

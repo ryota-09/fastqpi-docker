@@ -22,6 +22,7 @@ def get_tasks_with_done(db: Session) -> task_model.Task:
   return result.all()
 
 def get_task(db: Session, task_id: int) -> task_model.Task | None:
+  print(f"@@@@@@@@@@@{task_id}")
   result : Result = db.execute(
     select(task_model.Task).filter(task_model.Task.id == task_id)
   )
@@ -33,3 +34,7 @@ def update_task(db: Session, task_create: task_schema.TaskCreate, original: task
   db.commit()
   db.refresh(original)
   return original
+
+def delete_task(db: Session, original: task_model.Task) -> None:
+  db.delete(original)
+  db.commit()
