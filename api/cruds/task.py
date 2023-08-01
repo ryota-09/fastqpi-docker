@@ -22,11 +22,10 @@ def get_tasks_with_done(db: Session) -> task_model.Task:
   return result.all()
 
 def get_task(db: Session, task_id: int) -> task_model.Task | None:
-  print(f"@@@@@@@@@@@{task_id}")
   result : Result = db.execute(
     select(task_model.Task).filter(task_model.Task.id == task_id)
   )
-  return result.scalar()
+  return result.scalars().first()
 
 def update_task(db: Session, task_create: task_schema.TaskCreate, original: task_model.Task) -> task_model.Task:
   original.title = task_create.title
